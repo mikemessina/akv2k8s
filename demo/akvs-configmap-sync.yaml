@@ -7,7 +7,7 @@ spec:
   vault:
     name: mwmakskeyvault # name of key vault
     object:
-      name: mySecret # name of the akv object
+      name: configmap-secret # name of the akv object
       type: secret # akv object type
   output:
     configMap:
