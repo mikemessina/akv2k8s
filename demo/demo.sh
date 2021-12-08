@@ -71,4 +71,5 @@ kubectl apply -f ./demo/deployment.yaml
 # See log output from pod
 kubectl -n akv-test logs deployment/akvs-secret-app
 
-kubectl logs akv2k8s-test -n akv-test
+# Get configmap details
+kubectl -n akv-test get configmap
