@@ -12,18 +12,18 @@ kubectl apply -f ./demo/akvs-secret-inject.yaml
 kubectl apply -f ./demo/deployment.yaml
 
 # List AzureKeyVaultSecrets
-kubectl -n akv-test get akvs
+kubectl get akvs -n akv-test
 
 # List secrets
-kubectl -n akv-test get secret
-kubectl -n akv-test describe secret my-secret-from-akv
-
-# See log output from pod
-kubectl -n akv-test logs deployment/akvs-secret-app
+kubectl get secret -n akv-test
+kubectl describe secret my-secret-from-akv -n akv-test
 
 # Get configmap details
-kubectl -n akv-test get configmap
+kubectl get configmap -n akv-test
 kubectl describe configmap my-configmap-secret-from-akv -n akv-test
+
+# See log output from pod
+kubectl logs deployment/akvs-secret-app -n akv-test
 
 # Troubleshooting
 kubectl -n akv2k8s logs deployment/akv2k8s-controller
