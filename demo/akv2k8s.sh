@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 export akv_name="aks-akv"
+export secret="akv-secret"
 export CLUSTER_NAME="mwm-aks"
 export SubId="b6af983a-654f-438a-aec9-376ad7ddec20"
 export SpId="80f9f931-cb74-4143-8661-9cf72ed580b3"
@@ -21,5 +22,11 @@ az keyvault set-policy \
     --spn ${SpId} \
     --subscription ${SubId}
 
-# 3 - Apply akv2k8s to aks
+# 3 - Add secret value to AKV
+az keyvault secret set \
+    --vault-name ${akv_name} \
+    --name ${secret} \
+    --value "My super secret"
+
+# 4 - Apply akv2k8s to aks
 kubectl apply -f demo/akv-secret-sync.yaml
