@@ -20,4 +20,4 @@ spec:
         args: ["TEST_SECRET"]
         env:
         - name: TEST_SECRET
-          value: "secret-inject@azurekeyvault" # ref to akvs
+          value: "secret-inject@AzureKeyVaultSecret" # ref to akvs

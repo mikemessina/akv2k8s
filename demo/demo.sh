@@ -24,7 +24,9 @@ echo 'encoded-value' | base64 --decode
 kubectl get configmap -n akv-test
 kubectl describe configmap configmap-secret-from-akv -n akv-test
 
-# See log output from pod
+# See output from pod
+kubectl get pod -n akv-test
+kubectl describe pod akvs-secret-app-5cf9bf8864-gcszv -n akv-test
 kubectl logs deployment/akvs-secret-app -n akv-test
 
 # Troubleshooting
