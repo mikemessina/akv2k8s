@@ -59,6 +59,11 @@ kubectl apply -f ./demo/namespace.yaml
 # Create key vault secret
 kubectl apply -f ./demo/secret-sync.yaml
 
+# List AzureKeyVaultSecrets
+kubectl -n akv-test get akvs
+
+kubectl -n akv-test get secret
+
 # Create pod
 kubectl apply -f ./demo/pod.yaml
 
