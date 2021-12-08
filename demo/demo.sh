@@ -62,3 +62,9 @@ helm install azure-key-vault-env-injector \
 
 # Configuration - Create Namespace
 kubectl apply -f ./demo/namespace.yaml
+
+# Create key vault secret
+kubectl apply -f ./demo/akv-secret-sync.yaml
+
+# Create pod
+kubectl apply -f ./demo/pod.yaml
