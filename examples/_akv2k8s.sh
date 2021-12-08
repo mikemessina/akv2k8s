@@ -2,6 +2,7 @@
 
 export akv_name="aks-akv"
 export secret="akv-secret"
+export RESOURCE_GROUP="aks-mwm-rg"
 export CLUSTER_NAME="mwm-aks"
 export SubId="b6af983a-654f-438a-aec9-376ad7ddec20"
 export SpId="80f9f931-cb74-4143-8661-9cf72ed580b3"
@@ -14,6 +15,28 @@ helm repo update
 
 helm upgrade --install akv2k8s spv-charts/akv2k8s \
     --namespace akv2k8s
+
+helm install azure-key-vault-controller \
+    spv-charts/azure-key-vault-controller \
+    --namespace akv2k8s
+
+helm install azure-key-vault-env-injector \
+    spv-charts/azure-key-vault-env-injector \
+    --set installCrd=false \
+    --namespace akv2k8s
+
+# Create sp
+az ad sp create-for-rbac --name aks-sp
+az keyvault set-policy \
+    -n ${akv_name} \
+    --secret-permissions get \
+    --spn aks-sp \
+    --subscription ${SubId}
+
+# 2 - Get service principal id
+az aks update -g ${RESOURCE_GROUP} -n ${CLUSTER_NAME} --enable-managed-identity
+
+az aks show -g ${RESOURCE_GROUP} -n ${CLUSTER_NAME} --query "identity"
 
 # 2 - Set AKV policy
 az keyvault set-policy \
@@ -30,3 +53,6 @@ az keyvault secret set \
 
 # 4 - Apply akv2k8s to aks
 kubectl apply -f demo/akv-secret-sync.yaml
+
+# 5 - List AzureKeyVaultSecret
+kubectl get akvs
