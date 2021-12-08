@@ -3,6 +3,8 @@ kind: Pod
 metadata:
   name: akv2k8s-test
   namespace: akv-test
+  labels:
+    azure-key-vault-env-injection: enabled
 spec:
   containers:
   - name: akv2k8s-env-test
