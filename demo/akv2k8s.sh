@@ -1,14 +1,18 @@
 #! /usr/bin/env bash
 
-export RESOURCE_GROUP="aks-mwm-rg"
+export akv_name="aks-akv"
 export CLUSTER_NAME="mwm-aks"
+export SubId="b6af983a-654f-438a-aec9-376ad7ddec20"
+export SpId="80f9f931-cb74-4143-8661-9cf72ed580b3"
 
-az account show
+# Set AKV policy
 
-az aks get-credentials --resource-group ${RESOURCE_GROUP} --name ${CLUSTER_NAME}
-kubectl config use-context ${CLUSTER_NAME}
+az keyvault set-policy \
+    -n ${akv_name} \
+    --secret-permissions get \
+    --spn ${SpId} \
+    --subscription ${SubId}
 
-kubectl get nodes
-kubectl get pods
+# Apply akv2k8s to aks
 
-kubectl create -f examples/guestbook-go/redis-master-controller.json
+kubectl apply -f demo/akv-secret-sync.yaml
