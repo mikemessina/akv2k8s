@@ -5,7 +5,7 @@ metadata:
   namespace: akv-test
 spec:
   vault:
-    name: akv2k8s-test # name of key vault
+    name: mwmakskeyvault # name of key vault
     object:
       name: mySecret # name of the akv object
       type: secret # akv object type
