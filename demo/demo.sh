@@ -17,6 +17,7 @@ kubectl get akvs -n akv-test
 # List secrets
 kubectl get secret -n akv-test
 kubectl describe secret my-secret-from-akv -n akv-test
+kubectl get secret my-secret-from-akv -o jsonpath='{.data}'
 
 # Get configmap details
 kubectl get configmap -n akv-test
@@ -27,3 +28,6 @@ kubectl logs deployment/akvs-secret-app -n akv-test
 
 # Troubleshooting
 kubectl -n akv2k8s logs deployment/akv2k8s-controller
+
+# Cleanup
+kubectl delete namespace akv-test
