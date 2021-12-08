@@ -50,21 +50,17 @@ helm repo add spv-charts http://charts.spvapi.no
 helm repo update
 
 # Install the controller and AzureKeyVaultSecret CRD
-helm install azure-key-vault-controller \
-    spv-charts/azure-key-vault-controller \
-    --namespace akv2k8s
-
-# Install the Env-Injector
-helm install azure-key-vault-env-injector \
-    spv-charts/azure-key-vault-env-injector \
-    --set installCrd=false \
+helm upgrade --install akv2k8s spv-charts/akv2k8s \
     --namespace akv2k8s
 
 # Configuration - Create Namespace
 kubectl apply -f ./demo/namespace.yaml
 
 # Create key vault secret
-kubectl apply -f ./demo/akv-secret-sync.yaml
+kubectl apply -f ./demo/secret-sync.yaml
 
 # Create pod
 kubectl apply -f ./demo/pod.yaml
+
+# See log output from pod
+kubectl logs akv2k8s-test -n akv-test
