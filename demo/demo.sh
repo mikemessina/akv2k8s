@@ -17,7 +17,7 @@ kubectl get akvs -n akv-test
 # List secrets
 kubectl get secret -n akv-test
 kubectl describe secret my-secret-from-akv -n akv-test
-kubectl get secret my-secret-from-akv -o jsonpath='{.data}'
+kubectl get secret my-secret-from-akv -o jsonpath='{.data}' -n akv-test
 echo 'encoded-value' | base64 --decode
 
 # Get configmap details
