@@ -63,6 +63,7 @@ kubectl apply -f ./demo/secret-sync.yaml
 kubectl -n akv-test get akvs
 
 kubectl -n akv-test get secret
+kubectl -n akv-test describe secret my-secret-from-akv
 
 # Create pod
 kubectl apply -f ./demo/pod.yaml
