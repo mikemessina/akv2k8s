@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: akv2k8s-test
-  namespace: akv2k8s-test
+  namespace: akv-test
 spec:
   containers:
   - name: akv2k8s-env-test
